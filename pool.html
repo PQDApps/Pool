@@ -17,14 +17,47 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
+	game.load.image('sky', 'assets/sky.png');
 	game.load.image('ground', 'assets/platform.png');
+	game.load.image('whiteBall', 'assets/tempBall.png');
 }
 
+var walls;
+
 function create() {
-	
+	    //  We're going to be using physics, so enable the Arcade Physics system
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+	//  A simple background for our game
+    game.add.sprite(0, 0, 'sky');
+
+	// Walls group contains all the table walls
+	walls = game.add.group();
+	walls.enableBody = true;
+
+	// Enable physics on the wall
+	var bottomWall = walls.create(0, game.world.height - 64, 'ground');
+	bottomWall.scale.setTo(2,2);
+    //  This stops it from falling away when you jump on it
+    bottomWall.body.immovable = true;
+
+	var topWall = walls.create(0, 0, 'ground');
+	topWall.scale.setTo(2,2);
+	topWall.body.immovable = true;
+
+	var rightWall = walls.create(game.world.width - 64, 0, 'ground');
+	//rightWall.scale.setTo(2,2);
+	rightWall.height = game.world.height;
+	rightWall.width = 64;
+
+	var leftWall = walls.create(0, 0, 'ground');
+	//rightWall.scale.setTo(2,2);
+	leftWall.height = game.world.height;
+	leftWall.width = 64;
 }
 
 function update() {
+
 }
 
 </script>
