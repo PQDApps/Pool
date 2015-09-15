@@ -19,10 +19,11 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create
 function preload() {
 	game.load.image('sky', 'assets/sky.png');
 	game.load.image('ground', 'assets/platform.png');
-	game.load.image('whiteBall', 'assets/tempBall.png');
+	game.load.image('whiteBall', 'assets/ball.png');
 }
 
 var walls;
+var whiteBall
 
 function create() {
 	    //  We're going to be using physics, so enable the Arcade Physics system
@@ -54,10 +55,20 @@ function create() {
 	//rightWall.scale.setTo(2,2);
 	leftWall.height = game.world.height;
 	leftWall.width = 64;
+
+	whiteBall = game.add.sprite(game.world.width/2,game.world.height/2, 'whiteBall');
+	whiteBall.width = 32;
+	whiteBall.height = 32;
+
+	game.physics.enable(whiteBall);
+
+	whiteBall.body.gravity.y = 600;
+	whiteBall.body.bounce.y = 1;
 }
 
 function update() {
-
+	//  Collide the player and the stars with the platforms
+    game.physics.arcade.collide(whiteBall, walls);
 }
 
 </script>
