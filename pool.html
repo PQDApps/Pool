@@ -23,7 +23,7 @@ function preload() {
 }
 
 var walls;
-var whiteBall
+var whiteBall;
 
 function create() {
 	    //  We're going to be using physics, so enable the Arcade Physics system
@@ -62,7 +62,7 @@ function create() {
 
 	game.physics.enable(whiteBall);
 
-	whiteBall.body.gravity.y = 600;
+	whiteBall.body.gravity.y = 0;
 	whiteBall.body.bounce.y = 1;
 }
 
